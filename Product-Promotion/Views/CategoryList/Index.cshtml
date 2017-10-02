@@ -1,0 +1,220 @@
+﻿
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+@model catiga.Models.ORM.Entity.Product
+
+<!doctype html>
+<html lang="en">
+
+<!-- Mirrored from sainathchillapuram.com/BS/ss/electro-shoppe/category-grid.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 29 Feb 2016 14:13:53 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+
+
+    <meta charset="utf-8">
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CATIGA</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Google Web Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Oswald:400,700,300" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,700,300,600,800,400" rel="stylesheet" type="text/css">
+
+    <!-- CSS Files -->
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/css/owl.carousel.css" rel="stylesheet" />
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <link href="~/Content/css/responsive.css" rel="stylesheet" />
+
+    <!--[if lt IE 9]>
+        <script src="js/ie8-responsive-file-warning.js"></script>
+    <![endif]-->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Content/images/fav-144.html">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/Content/images/fav-114.html">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Content/images/fav-72.html">
+    <link rel="apple-touch-icon-precomposed" href="~/Content/images/fav-57.html">
+    <link rel="shortcut icon" href="~/Content/images/fav.html">
+
+</head>
+<body>
+    <!-- Header Section Starts -->
+    <!-- Header Section Ends -->
+    <!-- Main Container Starts -->
+    <div id="main-container" class="container">
+        <div class="row">
+
+            <!-- Sidebar Starts -->
+            <div class="col-md-3">
+                <!-- Categories Links Starts -->
+                <h3 class="side-heading">Kategoriler</h3>
+                <div class="list-group categories">
+                    <a href="/CategoryList/Index" class="list-group-item">
+                        Hepsi
+                    </a>
+                    <a href="/MasaTipi/Index" class="list-group-item">
+                        Masa Tipleri
+                    </a>
+                    <a href="/Bilimsel/Index" class="list-group-item">
+                        Bilimsel Tipler
+                    </a>
+                    <a href="/CepTipi/Index" class="list-group-item">
+                        Cep Tipleri
+                    </a>
+                </div>
+                <!-- Categories Links Ends -->
+                <!-- Shopping Options Starts -->
+                <h3 class="side-heading">Filtreler</h3>
+                <div class="list-group">
+                    @using (Html.BeginForm("hane", "CategoryList", FormMethod.Post))
+                    {
+
+                        <div class="list-group-item">
+                            <div class="filter-group" style="margin-left:2px;">
+                                <label class="checkbox">
+                                    @*<input name="filter1" type="checkbox" value="br1"/>*@
+                                    @Html.RadioButtonFor(x => x.Digit, "12")
+                                    12 Haneli
+                                </label>
+                                <label class="checkbox">
+                                    @*<input name="filter2" type="checkbox" value="br2" />*@
+                                    @Html.RadioButtonFor(x => x.Digit, "14")
+                                    14 Haneli
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="list-group-item">
+                            <button type="submit" class="btn btn-main">Filtrele</button>
+                        </div>
+
+                    }
+                </div>
+                <!-- Shopping Options Ends -->
+                <!-- Bestsellers Links Starts -->
+               
+                <!-- Bestsellers Links Ends -->
+            </div>
+            <!-- Sidebar Ends -->
+            <!-- Primary Content Starts -->
+            <div class="col-md-9">
+                <!-- Breadcrumb Starts -->
+                <ol class="breadcrumb">
+                    <li><a href="index-2.html">Anasayfa</a></li>
+                    <li class="active">Hepsi</li>
+                </ol>
+                <!-- Breadcrumb Ends -->
+                <!-- Main Heading Starts -->
+                <h2 class="main-heading2">
+                    Popüler Ürün
+                </h2>
+                <!-- Main Heading Ends -->
+                <!-- Category Intro Content Starts -->
+                <div class="row cat-intro">
+                    <div class="col-sm-3">
+                        <img src="~/Content/images/misc/cat-thumb-img1.jpg" alt="Image" class="img-responsive img-thumbnail" />
+                    </div>
+                    <div class="col-sm-9 cat-body">
+                        <p>
+                            x ürünü kullanıcılar tarafından en çok beğenilen ve kullanış açısından en popüler üründür.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- Product #1 Starts -->
+                    
+                        @foreach (var item in Model.Products)
+                        {
+                            <div class="col-md-4 col-sm-6" style="margin-top:10px;">
+                                <div class="product-col" style="width:262px; height:334px;">
+                                    <div class="image">
+                                        <img src="~/Urunler/@item.ImagePath" alt="product" class="img-responsive" style="width:200px;height:200px;" />
+                                    </div>
+                                    <div class="caption">
+                                        <h4><a href="product.html">@item.Name</a></h4>
+                                        <div class="description">
+                                            <span><b> @item.Type Tipi</b></span>   <br /> 
+                                            <span>@item.Digit Haneli</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                            
+                </div>
+                <!-- Product Grid Display Ends -->
+            </div>
+            <!-- Primary Content Ends -->
+        </div>
+    </div>
+    <!-- Main Container Ends -->
+    <!-- Footer Section Starts -->
+    @*<footer id="footer-area">
+        <!-- Footer Links Starts -->
+        <div class="footer-links">
+            <!-- Container Starts -->
+            <div class="container">
+
+
+
+
+                <!-- Contact Us Starts -->
+                <div class="col-md-4 col-sm-12 last" style="float:right; margin-right:-110px;">
+                    <h5>Bize Ulaşın</h5>
+                    <ul>
+                        <li>Ardaş Sanayi Ürünleri LTD. ŞTİ.</li>
+                        <li>
+                            Sarı Demir Mah. Ragıp Gümüşpala Cad. Ahenk Han No:93 Eminönü/İstanbul
+                        </li>
+                        <li>
+                            Email: <a href="#">ardaselektronik@gmail.om</a>
+                        </li>
+                    </ul>
+                    <h4 class="lead">
+                        Tel: <span>0(212) 511-7424</span>
+                    </h4>
+                </div>
+                <!-- Contact Us Ends -->
+            </div>
+            <!-- Container Ends -->
+        </div>
+        <!-- Footer Links Ends -->
+        <!-- Copyright Area Starts -->
+        <div class="copyright">
+            <!-- Container Starts -->
+            <div class="container">
+                <!-- Starts -->
+                <p class="pull-left">
+                    &copy; 2017 Ardaş Sanayi Ürünleri LTD. ŞTİ.
+                </p>
+                <!-- Ends -->
+            </div>
+            <!-- Container Ends -->
+        </div>
+        <!-- Copyright Area Ends -->
+    </footer>*@
+    <!-- Footer Section Ends -->
+    <!-- JavaScript Files -->
+</body>
+
+<!-- Mirrored from sainathchillapuram.com/BS/ss/electro-shoppe/category-grid.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 29 Feb 2016 14:13:54 GMT -->
+</html>

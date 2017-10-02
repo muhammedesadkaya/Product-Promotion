@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <!-- Header Section Starts -->
+    <header id="header-area">
+        <!-- Main Header Starts -->
+        <div class="main-header">
+            <div class="container">
+                <div class="row">
+                    <!-- Search Starts -->
+                    <div class="col-md-3">
+                        <div id="logo">
+                            <a href="/Home/Index"><img src="~/Content/images/CATIGATEK.jpg" title="Spice Shoppe" alt="Spice Shoppe" class="img-responsive" style="width:250px;height:100px; margin-top:-25px;" /></a>
+                        </div>
+                    </div>
+                    <!-- Search Ends -->
+                    <!-- Logo Starts -->
+                    <div class="col-md-6">
+
+                    </div>
+                    <!-- Logo Starts -->
+                    <!-- Shopping Cart Starts -->
+                    <div class="col-md-3">
+                        <div id="search">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-lg" placeholder="Search" id="search" name="search" autocomplete="off" >
+                                <span class="input-group-btn">
+                                    <button class="btn btn-lg" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Shopping Cart Ends -->
+                </div>
+            </div>
+        </div>
+        </header>
+        <!-- Main Header Ends -->
+        <div>
+            @RenderBody()
+
+            <footer id="footer-area">
+                <!-- Footer Links Starts -->
+                <div class="footer-links">
+                    <!-- Container Starts -->
+                    <div class="container">
+                        <!-- Contact Us Starts -->
+                        <div class="col-md-4 col-sm-12 last" style="float:right; margin-right:-110px;">
+                            <h5>Bize Ulaşın</h5>
+                            <ul>
+                                <li>Ardaş Sanayi Ürünleri LTD. ŞTİ.</li>
+                                <li>
+                                    Sarı Demir Mah. Ragıp Gümüşpala Cad. Ahenk Han No:93 Eminönü/İstanbul
+                                </li>
+                                <li>
+                                    Email: <a href="#">ardaselektronik@gmail.om</a>
+                                </li>
+                            </ul>
+                            <h4 class="lead">
+                                Tel: <span>0(212) 511-7424</span>
+                            </h4>
+                        </div>
+                        <!-- Contact Us Ends -->
+                    </div>
+                    <!-- Container Ends -->
+                </div>
+                <!-- Footer Links Ends -->
+                <!-- Copyright Area Starts -->
+                <div class="copyright">
+                    <!-- Container Starts -->
+                    <div class="container">
+                        <!-- Starts -->
+                        <p class="pull-left">
+                            &copy; 2017 Ardaş Sanayi Ürünleri LTD. ŞTİ.
+                        </p>
+                        <!-- Ends -->
+                    </div>
+                    <!-- Container Ends -->
+                </div>
+                <!-- Copyright Area Ends -->
+            </footer>
+        </div>
+    @*<script src="~/Scripts/jquery-1.11.1.min.js"></script>*@
+    <script src="~/Scripts/JavaScript.js"></script>
+
+    <script src="~/Scripts/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery-migrate-1.2.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap-hover-dropdown.min.js"></script>
+    <script src="~/Scripts/jquery.magnific-popup.min.js"></script>
+    <script src="~/Scripts/owl.carousel.min.js"></script>
+    <script src="~/Scripts/custom.js"></script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $('#search').autocomplete({
+                focus: function (event, ui) {
+                    $(this).val(ui.item.fullname);
+                    return false
+                },
+                source: function (request, response) {
+                    $.ajax({
+                        url: '/Arama/Autocomplete',
+                        method: 'POST',
+                        data: { term: request.term },
+                        dataTpye: 'json',
+                        success: function (data) {
+                            response(data);
+
+                        }
+                    });
+                }
+
+            })
+        .autocomplete('instance')._renderItem = function (ul, item) {
+            if (item.Name == "Show More...") {
+                return $('<li>')
+                .append('<a href="' + item.UserName + '">' + item.Name + '</a>')
+                .appendTo(ul);
+            }
+            else if (item.Name == "Not found") {
+                return $('<li>')
+                .append('<a>' + item.Name + '</a>')
+                .appendTo(ul);
+            }
+            else {
+                return $('<li>')
+                .append('<img class="searchIMG" src=  "../../Users/'+item.ID+'/' + item.ImageUrl + '" alt=' + item.Name + '/>')
+                .append('<a href="/Profile/Index/' + item.UserName + '">' + item.Name + " " +item.Surname + '</a>')
+                .append('<span style="font-size:10px;color:#bdc3c7">(' + item.Title + ')</span>')
+                .appendTo(ul);
+            }
+        }
+        });
+    </script>
+    
+    <style>
+        /*.ui-menu-item, .ui-menu-item a, .ui-menu-item img, .ui-menu-item span, .ui-widget-content {
+            border: none !important;
+            outline: none !important;
+            text-decoration: none !important;
+            list-style-image: none;
+        }
+
+            .ui-menu-item:hover, .ui-menu-item a:hover, .ui-menu-item img:hover, .ui-menu-item span:hover, .ui-widget-content:hover {
+                border: none !important;
+                outline: none !important;
+                text-decoration: none !important;
+                list-style-image: none;
+                background:#3498db;
+            }*/
+        .ui-menu-item {
+            list-style: none;
+            box-sizing: border-box;
+            border: 0px solid #fff;
+            font-size: 14px;
+            background: #fff;
+            width: 100%;
+            border-left: 1px solid #2c3e50;
+            border-right: 1px solid #2c3e50;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        .ui-menu {
+            border-bottom: 1px solid #2c3e50;
+            background: #fff;
+            width: 400px;
+            margin: 0px;
+            padding: 0px;
+            -webkit-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
+        }
+
+        .searchIMG {
+            width: 70px !important;
+            height: 60px !important;
+        }
+
+        .ui-autocomplete {
+            padding-top: 13px !important;
+        }
+
+        .ui-menu-item-wrapper {
+            padding-left: 15px;
+        }
+
+        .ui-menu-item:hover {
+            background: #3498db;
+            color: #fff !important;
+        }
+
+            .ui-menu-item:hover a {
+                color: #fff !important;
+                text-decoration: none;
+            }
+
+        .ui-menu-item a:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+
+
+</body>
+</html>
